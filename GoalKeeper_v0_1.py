@@ -1,6 +1,5 @@
 '''
 By Kevin Song
-
 31/10/2017
 '''
 from selenium import webdriver
@@ -8,7 +7,7 @@ from time import sleep
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
 import re
-import GoalKeeperGUI
+#import GoalKeeperGUI
 '''
 driver = webdriver.Firefox()
 actions = ActionChains(driver)
@@ -45,7 +44,7 @@ def go():
 		#incidents = driver.find_elements_by_class_name("ng-scope ng-isolate-scope data_row")
 		incidents = driver.find_elements_by_xpath(".//*[@class='ng-scope ng-isolate-scope data_row']")
 		if len(incidents) == 0:
-			print(str(len(incidents)) + ' tickets in the Q, refreshing page...')
+			print(str(len(incidents)) + ' tickets in the Q, waiting...')
 			actions.key_down(Keys.F5)
 			actions.key_up(Keys.F5)
 			#sleep(3)
@@ -54,10 +53,17 @@ def go():
 			if updated.startswith('j'):
 				print('This ticket just came in.')
 			else:
-				if(int(re.sub("\D","",updated)) >= 15):
-					print('This ticket is over 15 min, Waiting to be assigned...')
-					actions.context_click(driver.find_element_by_xpath("/html/body/sn-list-parent/sn-list/div/div/div/div[2]/div/div[3]/table[1]/tbody/tr[1]/td[3]/span[2]/a"))
-					#actions.move_by_offset(90,173).click()
+				time = int(re.sub("\D","",updated))
+				if(time >= 5):
+					print('This ticket is over 15 min, Waiting to be assigned in 3 seconds...')
+					print('Assigning to Kevin Song')	
+					if(driver.find_element_by_xpath("/html/body/sn-list-parent/sn-list/div/div/div/div[2]/div/div[3]/table[1]/tbody/tr[1]/td[12]/span/span").text == 'true'):
+						actions.context_click(driver.find_element_by_xpath("/html/body/sn-list-parent/sn-list/div/div/div/div[2]/div/div[3]/table[1]/tbody/tr/td[3]/span[2]/a"))
+						#actions.move_by_offset(90,173).click()
+					else:												   #/html/body/sn-list-parent/sn-list/div/div/div/div[2]/div/div[3]/table[1]/tbody/tr/td[3]/span/a
+						actions.context_click(driver.find_element_by_xpath("/html/body/sn-list-parent/sn-list/div/div/div/div[2]/div/div[3]/table[1]/tbody/tr/td[3]/span/a")
+						#actions.move_by_offset(90,173).click()
+					print('Assignment complete')
 				else:
 					print("This ticket isn't over 15 mins, waiting...")
 					#sleep(10)
@@ -68,10 +74,17 @@ def go():
 			if updated.startswith('j'):
 				print('This ticket just came in.')
 			else:
-				if(int(re.sub("\D","",updated)) >= 15):
-					print('The first ticket is over 15 min, waiting to be assigned...')
-					actions.context_click(driver.find_element_by_xpath("/html/body/sn-list-parent/sn-list/div/div/div/div[2]/div/div[3]/table[1]/tbody/tr[1]/td[3]/span[2]/a"))
-					#actions.move_by_offset(90,173).click()
+				time = int(re.sub("\D","",updated))
+				if(time >= 5):
+					print('The first ticket is over 15 min, waiting to be assigned in 3 seconds...')
+					print('Assigning to Kevin Song')				       
+					if(driver.find_element_by_xpath("/html/body/sn-list-parent/sn-list/div/div/div/div[2]/div/div[3]/table[1]/tbody/tr[1]/td[12]/span/span").text == 'true'):
+						actions.context_click(driver.find_element_by_xpath("/html/body/sn-list-parent/sn-list/div/div/div/div[2]/div/div[3]/table[1]/tbody/tr/td[3]/span[2]/a"))
+						#actions.move_by_offset(90,173).click()
+					else:												   #/html/body/sn-list-parent/sn-list/div/div/div/div[2]/div/div[3]/table[1]/tbody/tr[1]/td[3]/span/a
+						actions.context_click(driver.find_element_by_xpath("/html/body/sn-list-parent/sn-list/div/div/div/div[2]/div/div[3]/table[1]/tbody/tr/td[3]/span/a")
+						#actions.move_by_offset(90,173).click()
+					print('Assignment complete')
 				else:
 					print('These tickets are not over 15 mins, waiting...')
 					#sleep(10)
