@@ -15,18 +15,17 @@ def go():
 
 	driver.get("https://schenkeritsmprod.service-now.com/nav_to.do?uri=%2Fincident_list.do%3Fsysparm_clear_stack%3Dtrue%26sysparm_query%3Dassignment_group%253Dc299e951dbfd7e001529f3571d961913%255Eassigned_to%253D%255EstateNOT%2520IN6,7,8%26sysparm_fixed_query%3D")
 
-	sleep(3)
+	sleep(3)#waiting for login screen
 
 	driver.find_element_by_xpath("/html/body/article/div[2]/div/form/div[1]/fieldset/div[1]/input").send_keys('KEVISONG')
 	driver.find_element_by_xpath("/html/body/article/div[2]/div/form/div[1]/fieldset/div[2]/input").send_keys('Schenker160503!10')
 	driver.find_element_by_xpath("/html/body/article/div[2]/div/form/div[3]/div/button").click()
-	sleep(10)
-	sleep(60)
-
+	sleep(20)#waiting for frame
 	driver.switch_to.frame("gsft_main")
-
+	sleep(20)#waiting for inc list
 	while True:		   
-		sleep(20)			  #/html/body/sn-list-parent/sn-list/div/div/div/div[2]/div/div[3]/table[1]/tbody/tr   /td[9]/span/span/div[3]/sn-time-ago/time
+		sleep(20)
+					  #/html/body/sn-list-parent/sn-list/div/div/div/div[2]/div/div[3]/table[1]/tbody/tr   /td[9]/span/span/div[3]/sn-time-ago/time
 		#if (is_element_exist("/html/body/sn-list-parent/sn-list/div/div/div/div[2]/div/div[3]/table[1]/tbody/tr[1]/td[9]/span/span/div[3]/sn-time-ago/time")):
 		'''
 		if (is_element_exist(xpath)):
@@ -56,16 +55,18 @@ def go():
 																	           #/html/body/sn-list-parent/sn-list/div/div/div/div[2]/div/div[3]/table[1]/tbody/tr/td[3]/span[2]/a
 						inc_with_flag_single =    driver.find_element_by_xpath("/html/body/sn-list-parent/sn-list/div/div/div/div[2]/div/div[3]/table[1]/tbody/tr/td[3]/span[2]")#####
 						actions.context_click(inc_with_flag_single).perform()#.move_by_offset(90,173).click()
-						sleep(10)														
-						actions.move_by_offset(90,173).perform().click()
+						sleep(3)
+						actions.move_by_offset(90,173).click().perform()
+						sleep(3)
 						#driver.find_element_by_xpath('/html/body/div[3]/ul/li[8]/a').click()
 					else:												       
 						#actions.context_click(driver.find_element_by_xpath("/html/body/sn-list-parent/sn-list/div/div/div/div[2]/div/div[3]/table[1]/tbody/tr/td[3]/span/a")
 																			   #/html/body/sn-list-parent/sn-list/div/div/div/div[2]/div/div[3]/table[1]/tbody/tr/td[3]/span/a
 						inc_without_flag_single = driver.find_element_by_xpath("/html/body/sn-list-parent/sn-list/div/div/div/div[2]/div/div[3]/table[1]/tbody/tr/td[3]/span")########
 						actions.context_click(inc_without_flag_single).perform()#.move_by_offset(90,173).click()
-						sleep(10)
-						actions.move_by_offset(90,173).perform().click()
+						sleep(3)
+						actions.move_by_offset(90,173).click().perform()
+						sleep(3)
 						#driver.find_element_by_xpath('/html/body/div[3]/ul/li[8]/a').click()
 					print('Assignment complete')
 				else:
@@ -87,17 +88,18 @@ def go():
 																		     #/html/body/sn-list-parent/sn-list/div/div/div/div[2]/div/div[3]/table[1]/tbody/tr[1]/td[3]/span[2]/a
 						inc_with_flag_muti =    driver.find_element_by_xpath("/html/body/sn-list-parent/sn-list/div/div/div/div[2]/div/div[3]/table[1]/tbody/tr[1]/td[3]/span[2]")#####
 						actions.context_click(inc_with_flag_muti).perform()#.move_by_offset(90,173).click()
-						sleep(10)														
-						actions.move_by_offset(90,173).perform().click()
+						sleep(3)
+						actions.move_by_offset(90,173).click().perform()
+						sleep(3)
 						#driver.find_element_by_xpath('/html/body/div[3]/ul/li[8]/a').click()
 					else:												    
 						#actions.context_click(driver.find_element_by_xpath("/html/body/sn-list-parent/sn-list/div/div/div/div[2]/div/div[3]/table[1]/tbody/tr/td[3]/span/a")
 																			 #/html/body/sn-list-parent/sn-list/div/div/div/div[2]/div/div[3]/table[1]/tbody/tr[1]/td[3]/span/a
 						inc_without_flag_muti = driver.find_element_by_xpath("/html/body/sn-list-parent/sn-list/div/div/div/div[2]/div/div[3]/table[1]/tbody/tr[1]/td[3]/span")########
 						actions.context_click(inc_without_flag_muti).perform()#.move_by_offset(90,173).click()
-						sleep(10)
-						actions.move_by_offset(90,173).perform().click()
-						#driver.find_element_by_xpath('/html/body/div[3]/ul/li[8]/a').click()
+						sleep(3)
+						actions.move_by_offset(90,173).click().perform()
+						sleep(3)
 					print('Assignment complete')
 				else:
 					print('These tickets are not over 15 mins, waiting...')
