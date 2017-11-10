@@ -8,8 +8,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
 from datetime import datetime
 import re
-#print()
-#print("[" + str(datetime.now())[:19] + "]")
+
 def assign_to_me_all():
 	print("Welcome to GoalKeeper v0.1 | A Kevin Song Production")
 	sleep(2)
@@ -33,33 +32,27 @@ def assign_to_me_all():
 	print("Initiating GoalKeeper")
 
 	while True:		   
-		sleep(30)
+		sleep(10)
 		
 		incidents = driver.find_elements_by_xpath(".//*[@class='ng-scope ng-isolate-scope data_row']")
 		incidents_numbers = len(incidents)
 		if incidents_numbers == 0:
 			print('----------------------------------------')
-			print("[" + str(datetime.now())[:19] + "] " + 'Q is cleared   :-)')
-			sleep(1)
+			sleep(2)
+			print("[" + str(datetime.now())[:19] + "] " + 'Scanning the Queue')
+			sleep(2)
+			print("[" + str(datetime.now())[:19] + "] " + 'Queue is cleared:)')
+			sleep(2)
 		elif incidents_numbers == 1:
 			print('----------------------------------------')
+			sleep(2)
+			print("[" + str(datetime.now())[:19] + "] " + 'Scanning the Queue')
+			sleep(2)
 			print("[" + str(datetime.now())[:19] + "] " + '1  ticket in the Q')
-			sleep(1)
+			sleep(2)
 			updated = driver.find_element_by_xpath("/html/body/sn-list-parent/sn-list/div/div/div/div[2]/div/div[3]/table[1]/tbody/tr/td[9]/span/span/div[3]/sn-time-ago/time").text
 			if updated.startswith('j'):
 				print('This ticket just came in, less than 1 m.')
-				'''
-				if(driver.find_element_by_xpath("/html/body/sn-list-parent/sn-list/div/div/div/div[2]/div/div[3]/table[1]/tbody/tr[1]/td[12]/span/span").text == 'true'):
-					inc_with_flag_single_j_text = driver.find_element_by_xpath("/html/body/sn-list-parent/sn-list/div/div/div/div[2]/div/div[3]/table[1]/tbody/tr/td[3]/span[2]/a").text
-					print('Incident:' + '\t' + inc_with_flag_single_j_text)
-					print('Updated:' + '\t' + 'just now')
-					print('Assigning:' + '\t' + 'No')
-				else:
-					inc_without_flag_single_j_text = driver.find_element_by_xpath("/html/body/sn-list-parent/sn-list/div/div/div/div[2]/div/div[3]/table[1]/tbody/tr/td[3]/span/a").text
-					print('Incident:' + '\t' + inc_without_flag_single_j_text)
-					print('Updated:' + '\t' + 'just now')
-					print('Assigning:' + '\t' + 'No')
-				'''
 			else:
 				time = int(re.sub("\D","",updated))
 				if(time >= 25):
@@ -83,8 +76,11 @@ def assign_to_me_all():
 					print("This ticket isn't over 25m, waiting.....")
 		else:
 			print('----------------------------------------')
+			sleep(2)
+			print("[" + str(datetime.now())[:19] + "] " + 'Scanning the Queue')
+			sleep(2)
 			print("[" + str(datetime.now())[:19] + "] " + str(incidents_numbers) + ' tickets in the Q')
-			sleep(1)
+			sleep(2)
 			updated = driver.find_element_by_xpath("/html/body/sn-list-parent/sn-list/div/div/div/div[2]/div/div[3]/table[1]/tbody/tr[1]/td[9]/span/span/div[3]/sn-time-ago/time").text
 			if updated.startswith('j'):
 				print('This ticket just came in, less than 1 m.')
